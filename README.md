@@ -21,7 +21,7 @@ The **Car Show Registration System** is a full-stack event management platform b
 This project demonstrates end-to-end full-stack development and team collaboration across two core layers:
 
 - ** Frontend Development:** Responsible for the responsive user interface, interactive dashboard, KPI cards, live search and filtering, pagination, modal workflows, and API state handling.
-- **⚙️ Backend Development:** Responsible for RESTful API endpoints, Vertical Slice Architecture, CQRS command/query handlers, input validation, fee calculations, and SQLite database persistence via Entity Framework Core.
+- **Backend Development:** Responsible for RESTful API endpoints, Vertical Slice Architecture, CQRS command/query handlers, input validation, fee calculations, and SQLite database persistence via Entity Framework Core.
 
 ---
 
@@ -65,7 +65,7 @@ Allows users or event staff to register new vehicles and participants through a 
 
 ---
 
-### 🔍 3. Debounced Search & Multi-Criteria Filtering
+###  3. Debounced Search & Multi-Criteria Filtering
 
 Makes locating specific entries fast and responsive even as the participant list grows.
 
