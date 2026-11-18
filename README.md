@@ -1,126 +1,197 @@
-Car Show Registration System
+# 🏎️ Car Show Registration System
 
-A full-stack web application for managing participant registrations, payment tracking, and event statistics for a car show. The system replaces paper forms and shared spreadsheets with a centralized dashboard backed by a REST API.
+<div align="center">
 
-Live frontend: https://car-show-registration-system-edma-f.vercel.app/
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=600&size=22&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=780&lines=Welcome+to+Car+Show+Registration+System;Full-Stack+Event+%26+Participant+Management;Track+Registrations%2C+KPIs%2C+Payments+%26+Statuses;React+%2B+Vite+%2B+Tailwind+CSS+%7C+ASP.NET+Core+Vertical+Slice" alt="Typing SVG" />
 
-Table of Contents
-Overview
-Team and Responsibilities
-Features
-Technology Stack
-Project Structure
-Installation and Local Setup
-API Reference
-Screenshots and Project Evidence
-Academic Information
-1. Overview
+**Register. Track. Filter. Manage.**
 
-The Car Show Registration System allows event organizers to register participants and their vehicles, monitor registration and payment status, and review event totals in real time. Participants may register as Exhibitors, Competitors, or VIPs, and the server determines the corresponding registration fee.
+A full-stack web application designed to streamline participant registrations, track payment statuses, monitor event KPIs, and manage vehicle entries for a car show event.
 
-The project is divided into two layers developed in parallel:
+ **Live Frontend Demo:** [Car Show Registration System](https://car-show-registration-system-edma-f.vercel.app/)
 
-Frontend: a responsive dashboard that provides KPI cards, search and filtering, pagination, and registration forms.
-Backend: a RESTful API built with Vertical Slice Architecture, command and query handlers, input validation, fee calculation, and SQLite persistence through Entity Framework Core.
-2. Team and Responsibilities
-Role	Developer	Responsibilities
-Frontend Developer	Gineva D. Edma	User interface design, React and Vite component architecture, Tailwind CSS styling, KPI dashboard, debounced search and filtering, pagination, and deployment on Vercel.
-Backend Developer	Harold C. Fulgar	ASP.NET Core Web API, Vertical Slice Architecture, command and query handlers, FluentValidation rules, SQLite and EF Core migrations, data seeding, and API documentation.
-3. Features
-3.1 Event KPI Dashboard
+</div>
 
-Presents key event metrics at the top of the dashboard.
+---
 
-Shows total registrations, confirmed entries, pending registrations, and payment totals.
-Refreshes the metric cards when new registrations are added or data is reloaded.
+## 📖 About the Project
 
-Frontend components: KpiCards.jsx, KpiCard.jsx, HeroSection.jsx API endpoint: GET /api/registrations/summary
+The **Car Show Registration System** is a full-stack event management platform built to simplify how organizers and participants handle car show registrations. Instead of manual tracking, the system provides a centralized dashboard where users can submit new entries, monitor real-time statistics, filter participants by registration type or status, and inspect detailed registration and payment records.
 
-3.2 New Registration Form
+This project demonstrates end-to-end full-stack development and team collaboration across two core layers:
 
-Allows event staff to register a participant and vehicle through a validated modal form.
+- ** Frontend Development:** Responsible for the responsive user interface, interactive dashboard, KPI cards, live search and filtering, pagination, modal workflows, and API state handling.
+- **⚙️ Backend Development:** Responsible for RESTful API endpoints, Vertical Slice Architecture, CQRS command/query handlers, input validation, fee calculations, and SQLite database persistence via Entity Framework Core.
 
-Collects participant details, vehicle details, and the registration type.
-Applies the registration fee on the server according to the selected type.
-Submits the entry to the backend and updates the dashboard list.
+---
 
-Frontend component: NewRegistrationModal.jsx Backend slice: CreateRegistrationCommand.cs, CreateRegistrationValidator.cs
+##  Developers & Roles
 
-3.3 Search and Multi-Criteria Filtering
+| Role | Developer | Core Responsibilities |
+|---|---|---|
+| ** Frontend Developer** | **Gineva D. Edma** | UI/UX design, React + Vite component architecture, Tailwind CSS styling, KPI dashboard, search/debounce filtering, pagination, and frontend deployment on Vercel. |
+| ** Backend Developer** | **Harold C. Fulgar** | ASP.NET Core Web API, Vertical Slice Architecture, CQRS handlers, FluentValidation rules, SQLite + EF Core migrations, data seeding, and API documentation. |
 
-Allows organizers to locate entries quickly as the participant list grows.
+---
 
-Searches by participant name using a custom debounce hook to limit API requests.
-Filters by registration type and registration status.
-Provides a reset option and an empty-state message when no records match.
+##  Features and Functionalities
 
-Frontend components: RegistrationFilters.jsx, useDebounce.js, EmptyState.jsx Backend slice: GetRegistrationsQuery.cs, GetRegistrationsQueryHandler.cs
+###  1. Real-Time Event KPI Dashboard
 
-3.4 Registration Table and Pagination
+Provides organizers with an immediate overview of key event metrics right at the top of the dashboard.
 
-Displays registration records in a structured table.
+**Functionalities:**
+- Displays summary statistics for total registrations, confirmed entries, pending approvals, and payment breakdowns.
+- Dynamically updates metric cards whenever new registrations are added or data is refreshed.
 
-Shows participant details, registration type, payment status, and registration status.
-Uses server-side pagination for browsing multiple pages of records.
-Uses color-coded badges to distinguish statuses at a glance.
+**Technology used:**  React,  Vite,  Tailwind CSS, and  REST API (`GET /api/registrations/summary`).
 
-Frontend components: RegistrationTable.jsx, Pagination.jsx, StatusBadge.jsx, PaymentBadge.jsx, formatters.js
+**Components:** `KpiCards.jsx`, `KpiCard.jsx`, `HeroSection.jsx`
 
-3.5 Registration Details View
+---
 
-Allows organizers to inspect a single registration without leaving the dashboard.
+###  2. New Participant Registration Modal
 
-Retrieves the complete participant, vehicle, fee, and status details for a registration ID.
-Supports quick verification during event check-in.
+Allows users or event staff to register new vehicles and participants through a structured, validated modal form.
 
-Frontend component: RegistrationDetailsModal.jsx Backend slice: GetRegistrationByIdQuery.cs, GetRegistrationByIdQueryHandler.cs API endpoint: GET /api/registrations/{id}
+**Functionalities:**
+- Collects participant information, vehicle details, and registration category (`RegistrationType`).
+- Automatically computes corresponding registration fees based on entry rules.
+- Submits validated entries directly to the backend database and updates the dashboard list.
 
-3.6 Loading, Empty, and Error States
+**Technology used:**  React,  Tailwind CSS,  C# / ASP.NET Core, and  FluentValidation.
 
-Provides clear feedback under varying network and data conditions.
+**Components & Slices:** `NewRegistrationModal.jsx` | `CreateRegistrationCommand.cs`, `CreateRegistrationValidator.cs`
 
-Displays loading indicators while data is retrieved from the API.
-Displays an empty-state message when a search returns no results.
-Displays an error message with a retry option when the backend is unreachable.
+---
 
-Frontend components: LoadingState.jsx, EmptyState.jsx, ErrorState.jsx
+### 🔍 3. Debounced Search & Multi-Criteria Filtering
 
-3.7 Vertical Slice Backend and Data Seeding
+Makes locating specific entries fast and responsive even as the participant list grows.
 
-Organizes backend logic by feature rather than by technical layer.
+**Functionalities:**
+- Supports real-time search by participant or entry name using a custom debounce hook to minimize unnecessary API calls.
+- Filters entries by **Registration Type** and **Registration/Payment Status**.
+- Includes quick reset options and graceful empty-state feedback when no records match.
 
-Separates the command (CreateRegistration) and the queries (GetRegistrations, GetRegistrationById, GetRegistrationSummary) into self-contained slices.
-Enforces domain rules through typed enumerations (RegistrationType, RegistrationStatus, PaymentStatus) and the Result pattern.
-Applies EF Core migrations and seeds sample registrations into SQLite on startup.
+**Technology used:**  React Custom Hooks (`useDebounce`),  Tailwind CSS, and  ASP.NET Core Query Handlers.
 
-Backend modules: RegistrationEndpoints.cs, AppDbContext.cs, RegistrationSeeder.cs
+**Components:** `RegistrationFilters.jsx`, `useDebounce.js`, `EmptyState.jsx`
 
-4. Technology Stack
-Frontend (Gineva D. Edma)
-Technology	Purpose
-React	Component-based user interface
-Vite	Build tool and development server
-Tailwind CSS	Utility-first styling and responsive layout
-JavaScript (ES6+)	Application logic, custom hooks, and API client
-Vercel	Hosting for the deployed frontend
-Backend (Harold C. Fulgar)
-Technology	Purpose
-C# and ASP.NET Core	Minimal API web service
-Vertical Slice Architecture	Feature-based organization with command and query handlers
-Entity Framework Core	Object-relational mapping, migrations, and queries
-SQLite	File-based relational database for registrations
-FluentValidation	Validation rules for incoming requests
-5. Project Structure
-text
+---
+
+###  4. Interactive Registration Table & Pagination
+
+Organizes participant records in a clean, readable table with structured status indicators and page navigation.
+
+**Functionalities:**
+- Displays participant details, registration types, payment badges, and approval statuses.
+- Implements client/server-friendly pagination for smooth browsing across multiple pages of records.
+- Uses color-coded status and payment badges for quick visual scanning.
+
+**Technology used:**  React,  Tailwind CSS, and  JavaScript Formatters.
+
+**Components:** `RegistrationTable.jsx`, `Pagination.jsx`, `StatusBadge.jsx`, `PaymentBadge.jsx`, `formatters.js`
+
+---
+
+###  5. Registration Details Inspection Modal
+
+Lets organizers view complete information for any selected car show entry without leaving the main dashboard.
+
+**Functionalities:**
+- Fetches and displays full participant, vehicle, fee, and status details for a specific registration ID.
+- Provides a clean modal view for quick verification during event check-ins.
+
+**Technology used:**  React,  Tailwind CSS, and  REST API (`GET /api/registrations/{id}`).
+
+**Components & Slices:** `RegistrationDetailsModal.jsx` | `GetRegistrationByIdQuery.cs`, `GetRegistrationByIdQueryHandler.cs`
+
+---
+
+###  6. Resilient UI States (Loading, Empty & Error Handling)
+
+Ensures a smooth and informative user experience across different network and data conditions.
+
+**Functionalities:**
+- Displays skeleton/loading indicators while fetching data from the backend API.
+- Renders dedicated empty-state prompts when search filters return zero matches.
+- Displays clear error-state alerts with recovery options if the backend service is unreachable.
+
+**Technology used:**  React and  Tailwind CSS.
+
+**Components:** `LoadingState.jsx`, `EmptyState.jsx`, `ErrorState.jsx`
+
+---
+
+###  7. Vertical Slice Backend & Automated Seeding
+
+Structures backend operations around isolated feature slices for clean maintainability and scalability.
+
+**Functionalities:**
+- Separates commands (`CreateRegistration`) and queries (`GetRegistrations`, `GetRegistrationById`, `GetRegistrationSummary`) into self-contained Vertical Slices.
+- Enforces domain rules using typed Enums (`RegistrationType`, `RegistrationStatus`, `PaymentStatus`) and `Result` pattern extensions.
+- Automatically initializes and seeds sample car show data into SQLite on startup via Entity Framework Core migrations.
+
+**Technology used:**  C#,  ASP.NET Core,  Entity Framework Core,  SQLite, and  FluentValidation.
+
+**Backend Modules:** `RegistrationEndpoints.cs`, `AppDbContext.cs`, `RegistrationSeeder.cs`
+
+---
+
+##  Screenshots and Project Evidence
+
+The screenshots inside `docs/screenshots_frontend/` document the user interface, state handling, and full-stack integration:
+
+| Evidence | Description | Preview |
+|---|---|---|
+| **Folder Structure** | Organized frontend and backend workspace layout | `docs/screenshots_frontend/01-folder-structure.png` |
+| **Dashboard & KPI Cards** | Overview of event metrics and main header | `docs/screenshots_frontend/02a-dashboard-kpiCards.png` |
+| **Table & Pagination** | Participant table with status badges and page controls | `docs/screenshots_frontend/02b-table-pagination.png` |
+| **Loading State** | Visual feedback while awaiting API responses | `docs/screenshots_frontend/03-loading-state.png` |
+| **Search & Filters** | Live search by name, registration type, and status | `docs/screenshots_frontend/04-search-by-name.png` |
+| **Empty & Error States** | Graceful fallback screens for empty queries and API errors | `docs/screenshots_frontend/07-empty-state.png` |
+| **DevTools Network** | Verified HTTP requests between React frontend and ASP.NET Core API | `docs/screenshots_frontend/09-browser-devtools-network.png` |
+| **Running Full App** | Complete end-to-end application running locally | `docs/screenshots_frontend/11-running-full-app.png` |
+
+---
+
+##  Technologies Used
+
+###  Frontend Stack (Developed by Gineva D. Edma)
+
+| Technology | Purpose |
+|---|---|
+| ⚛️ **React** | Component-based user interface architecture |
+| ⚡ **Vite** | Fast frontend build tool and local development server |
+| 🎨 **Tailwind CSS** | Utility-first styling for responsive layouts and badges |
+| 🟨 **JavaScript (ES6+)** | Application logic, custom hooks (`useDebounce`), and API client |
+| ▲ **Vercel** | Cloud hosting for the live frontend deployment |
+
+### ⚙️ Backend Stack (Developed by Harold C. Fulgar)
+
+| Technology | Purpose |
+|---|---|
+| 🟣 **C# / ASP.NET Core** | Minimal APIs and backend web service framework |
+| 🧩 **Vertical Slice Architecture** | Feature-based organization with CQRS commands and queries |
+| 🗄️ **Entity Framework Core** | ORM for database modeling, migrations, and queries |
+| 💾 **SQLite** | Lightweight relational database for storing registrations |
+| ✅ **FluentValidation** | Declarative validation rules for incoming registration requests |
+
+---
+
+##  Project Structure
+
+```text
 Car-Show-Registration-System-EDMA-FULGAR-backend-dev/
 │
-├── frontend/                         # React, Vite, and Tailwind CSS application (Edma)
-│   ├── public/                       # Static assets
+├── frontend/                         # React + Vite + Tailwind CSS Application (Fulgar)
+│   ├── public/                       # Static assets, icons, and fonts
 │   ├── src/
-│   │   ├── api/                      # API service and fallback sample data
-│   │   ├── components/               # KPI cards, modals, table, and badges
-│   │   ├── hooks/                    # Custom hooks (useDebounce.js)
-│   │   ├── pages/                    # Main dashboard page (RegistrationsPage.jsx)
+│   │   ├── api/                      # Backend API service & fallback sample data
+│   │   ├── components/               # Reusable UI components (KPIs, Modals, Table, Badges)
+│   │   ├── hooks/                    # Custom React hooks (useDebounce.js)
+│   │   ├── pages/                    # Main dashboard view (RegistrationsPage.jsx)
 │   │   ├── utils/                    # Currency and date formatters
 │   │   ├── App.jsx
 │   │   └── main.jsx
@@ -129,85 +200,89 @@ Car-Show-Registration-System-EDMA-FULGAR-backend-dev/
 │   ├── tailwind.config.js
 │   └── vite.config.js
 │
-├── backend/                          # ASP.NET Core Vertical Slice API (Fulgar)
-│   ├── Api/                          # Endpoints, filters, extensions, Program.cs
-│   ├── Application/                  # Commands, queries, validators, and responses
-│   ├── Domain/                       # Entities, enumerations, and fee rules
-│   ├── Infrastructure/               # AppDbContext, migrations, and seeder
+├── backend/                          # ASP.NET Core Vertical Slice API (Gineva D. Edma)
+│   ├── Api/                          # Endpoints, Filters, Extensions, Program.cs
+│   ├── Application/                  # CQRS Commands, Queries, Validators & DTOs
+│   ├── Domain/                       # Entities (Registration), Enums & Fee Rules
+│   ├── Infrastructure/               # EF Core AppDbContext, Migrations & Seeder
 │   └── VerticalSlice.slnx
 │
 ├── docs/
-│   ├── Screenshots_backend/          # Backend API test evidence
-│   └── screenshots_frontend/         # Frontend and integration evidence
+│   ├── Screenshots_backend/          # Backend API execution evidence
+│   └── screenshots_frontend/         # Frontend UI & integration screenshots
 │
 └── README.md
-6. Installation and Local Setup
-Prerequisites
-Node.js 18 or later, with npm
-.NET SDK 10
-Git
-Backend
-bash
+```
+
+---
+
+## Installation and Local Setup
+
+### Prerequisites
+
+Make sure the following tools are installed on your machine:
+- **Node.js** (v18 or higher) and **npm**
+- **.NET SDK** (for running the ASP.NET Core backend)
+- **Git**
+
+### 1. Run the Backend API
+
+Open a terminal and navigate to the `backend` directory:
+
+```bash
 cd backend
 dotnet restore ./Api/Api.csproj
 dotnet build ./Api/Api.csproj
 dotnet run --project ./Api/Api.csproj
+```
 
-On startup, the API applies the EF Core migrations and seeds sample registrations into the SQLite database. The API is available at http://localhost:5205, and the interactive documentation is available at http://localhost:5205/scalar/v1.
+The backend API will start locally and automatically apply Entity Framework Core migrations and seed sample registration records into SQLite.
 
-Frontend
-bash
+### 2. Run the Frontend Application
+
+Open a separate terminal and navigate to the `frontend` directory:
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-Open the address shown in the terminal, typically http://localhost:5173. The deployed version is available at https://car-show-registration-system-edma-f.vercel.app/.
+Open the local development URL shown in your terminal (typically `http://localhost:5173`), or visit the deployed frontend at **[https://car-show-registration-system-edma-f.vercel.app/](https://car-show-registration-system-edma-f.vercel.app/)**.
 
-7. API Reference
-Endpoints
-Method	Endpoint	Description	Success	Errors
-POST	/api/registrations	Validates and creates a registration.	201 Created	400, 409
-GET	/api/registrations	Returns a paged list of registrations with optional filters.	200 OK	400
-GET	/api/registrations/{id}	Returns a single registration.	200 OK	404
-GET	/api/registrations/summary	Returns aggregated counts and fee totals for the dashboard.	200 OK	None
-Query parameters for GET /api/registrations
-Parameter	Default	Rule
-participantName	None	Case-insensitive contains match, maximum 150 characters
-type	None	Exhibitor, Competitor, or VIP
-status	None	Pending, Confirmed, CheckedIn, or Cancelled
-page	1	Must be 1 or greater
-pageSize	10	Must be between 1 and 50
+---
 
-Results are sorted by registration date, newest first. Filters may be combined.
+## Backend API Endpoints
 
-Business rules
-Registration fees are set by the server: Exhibitor PHP 1,500, Competitor PHP 2,500, and VIP PHP 5,000.
-The registration number, date, fee, and initial status (Pending) are assigned by the server and are ignored if sent by the client.
-A plate number may be registered only once; a duplicate returns 409 Conflict.
-The amount paid must be between 0 and the registration fee.
-Payment status (Unpaid, Partial, or Paid) is computed from the amount paid and is not stored.
-Cancelled registrations are excluded from the monetary totals in the summary.
-8. Screenshots and Project Evidence
+| HTTP Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/registrations` | Retrieves the list of car show registrations with optional filtering. |
+| `GET` | `/api/registrations/{id}` | Retrieves detailed information for a specific registration entry. |
+| `GET` | `/api/registrations/summary` | Returns aggregated KPI counts and fee totals for the dashboard. |
+| `POST` | `/api/registrations` | Validates and creates a new car show registration record. |
 
-Frontend evidence is stored in docs/screenshots_frontend/. Backend test evidence is stored in docs/Screenshots_backend/.
+---
 
-Evidence	Description	File
-Folder structure	Frontend and backend workspace layout	docs/screenshots_frontend/01-folder-structure.png
-Dashboard and KPI cards	Event metrics and page header	docs/screenshots_frontend/02a-dashboard-kpiCards.png
-Table and pagination	Participant table with status badges and page controls	docs/screenshots_frontend/02b-table-pagination.png
-Loading state	Feedback displayed while awaiting API responses	docs/screenshots_frontend/03-loading-state.png
-Search and filters	Search by name, registration type, and status	docs/screenshots_frontend/04-search-by-name.png
-Empty and error states	Fallback screens for empty results and API errors	docs/screenshots_frontend/07-empty-state.png
-Network requests	HTTP requests between the React frontend and the API	docs/screenshots_frontend/09-browser-devtools-network.png
-Running application	Complete application running locally	docs/screenshots_frontend/11-running-full-app.png
-9. Academic Information
-Item	Details
-Project title	Car Show Registration System
-Course	Integrative Programming 2
-Program and section	BS Information Technology, BSIT 3D
-Institution	Computer Communication Development Institute, Sorsogon Campus
-Frontend developer	Gineva D. Edma
-Backend developer	Harold C. Fulgar
-Frontend stack	React, Vite, Tailwind CSS
-Backend stack	C#, ASP.NET Core (Vertical Slice Architecture), EF Core, SQLite
-Live frontend	https://car-show-registration-system-edma-f.vercel.app/
+## Academic Project Information
+
+| Information | Details |
+|---|---|
+| **Project Title** | Car Show Registration System |
+| **Live Frontend URL** | [https://car-show-registration-system-edma-f.vercel.app/](https://car-show-registration-system-edma-f.vercel.app/) |
+| **Frontend Developer** | Gineva D. Edma |
+| **Backend Developer** | Harold C. Fulgar |
+| **Frontend Stack** | React, Vite, Tailwind CSS |
+| **Backend Stack** | C#, ASP.NET Core (Vertical Slice Architecture), EF Core, SQLite |
+
+---
+
+<div align="center">
+
+**🏎️ Car Show Registration System**
+
+*Built through collaborative frontend and backend engineering.*
+
+**Developed by:** Gineva D. Edma (Frontend) & Harold C. Fulgar (Backend)  
+**Course:** BS Information Technology — BSIT 3D
+
+</div>
