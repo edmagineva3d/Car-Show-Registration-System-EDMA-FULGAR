@@ -1,6 +1,76 @@
-@Api_HostAddress = http://localhost:5205
+@baseUrl = http://localhost:5205
 
-GET {{Api_HostAddress}}/api/students/
+### Case 01 - POST Create Valid Registration (201 Created, Competitor, Partial) -> Screenshot 4
+# @name case01
+POST {{baseUrl}}/api/registrations
+Content-Type: application/json
+
+{
+  "participantName": "Juan Dela Cruz",
+  "contactNumber": "09171234567",
+  "email": "juan.delacruz@example.com",
+  "address": "123 Rizal St., Sorsogon City",
+  "carMakeModel": "Toyota Supra MK4",
+  "plateNumber": "ABC 1234",
+  "registrationType": "Competitor",
+  "amountPaid": 1000
+}
+
+### Case 06 - POST Validation Errors on All 6 Fields (400 Bad Request) -> Screenshot 5
+POST {{baseUrl}}/api/registrations
+Content-Type: application/json
+
+{
+  "participantName": "",
+  "contactNumber": "12345",
+  "email": "not-an-email",
+  "address": "",
+  "carMakeModel": "",
+  "plateNumber": "",
+  "registrationType": "Competitor",
+  "amountPaid": 0
+}
+
+### Case 13 - POST Duplicate Plate Number (409 Conflict) -> Screenshot 6
+POST {{baseUrl}}/api/registrations
+Content-Type: application/json
+
+{
+  "participantName": "Duplicate Owner",
+  "contactNumber": "09181234567",
+  "email": "dup@example.com",
+  "address": "456 Mabini St., Sorsogon City",
+  "carMakeModel": "Honda Civic Type R",
+  "plateNumber": "ABC 1234",
+  "registrationType": "Exhibitor",
+  "amountPaid": 1500
+}
+
+### Case 14 - GET All Registrations Paged (200 OK) -> Screenshot 7
+GET {{baseUrl}}/api/registrations?page=1&pageSize=10
 Accept: application/json
 
-###
+### Case 20 - GET Filter by Type VIP (200 OK) -> Screenshot 8a
+GET {{baseUrl}}/api/registrations?type=VIP
+Accept: application/json
+
+### Case 21 - GET Filter by Status Confirmed (200 OK) -> Screenshot 8b
+GET {{baseUrl}}/api/registrations?status=Confirmed
+Accept: application/json
+
+### Case 22 - GET Filter by Participant Name "juan" (200 OK) -> Screenshot 8c
+GET {{baseUrl}}/api/registrations?participantName=juan
+Accept: application/json
+
+### Case 29 - GET Registration By ID from Case 01 (200 OK) -> Screenshot 9a
+@createdId = {{case01.response.body.$.id}}
+GET {{baseUrl}}/api/registrations/{{createdId}}
+Accept: application/json
+
+### Case 30 - GET Registration By Fake ID (404 Not Found) -> Screenshot 9b
+GET {{baseUrl}}/api/registrations/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+### Case 32 - GET Registration Summary (200 OK, all 8 KPI fields) -> Screenshot 10
+GET {{baseUrl}}/api/registrations/summary
+Accept: application/json
