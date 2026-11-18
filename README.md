@@ -1,4 +1,4 @@
-# 🏎️ Car Show Registration System
+#  Car Show Registration System
 
 <div align="center">
 
@@ -14,7 +14,7 @@ A full-stack web application designed to streamline participant registrations, t
 
 ---
 
-## 📖 About the Project
+##  About the Project
 
 The **Car Show Registration System** is a full-stack event management platform built to simplify how organizers and participants handle car show registrations. Instead of manual tracking, the system provides a centralized dashboard where users can submit new entries, monitor real-time statistics, filter participants by registration type or status, and inspect detailed registration and payment records.
 
@@ -162,21 +162,21 @@ The screenshots inside `docs/screenshots_frontend/` document the user interface,
 
 | Technology | Purpose |
 |---|---|
-| ⚛️ **React** | Component-based user interface architecture |
-| ⚡ **Vite** | Fast frontend build tool and local development server |
-| 🎨 **Tailwind CSS** | Utility-first styling for responsive layouts and badges |
-| 🟨 **JavaScript (ES6+)** | Application logic, custom hooks (`useDebounce`), and API client |
-| ▲ **Vercel** | Cloud hosting for the live frontend deployment |
+| **React** | Component-based user interface architecture |
+| **Vite** | Fast frontend build tool and local development server |
+| **Tailwind CSS** | Utility-first styling for responsive layouts and badges |
+| **JavaScript (ES6+)** | Application logic, custom hooks (`useDebounce`), and API client |
+| **Vercel** | Cloud hosting for the live frontend deployment |
 
-### ⚙️ Backend Stack (Developed by Harold C. Fulgar)
+### Backend Stack (Developed by Harold C. Fulgar)
 
 | Technology | Purpose |
 |---|---|
-| 🟣 **C# / ASP.NET Core** | Minimal APIs and backend web service framework |
-| 🧩 **Vertical Slice Architecture** | Feature-based organization with CQRS commands and queries |
-| 🗄️ **Entity Framework Core** | ORM for database modeling, migrations, and queries |
-| 💾 **SQLite** | Lightweight relational database for storing registrations |
-| ✅ **FluentValidation** | Declarative validation rules for incoming registration requests |
+| **C# / ASP.NET Core** | Minimal APIs and backend web service framework |
+| **Vertical Slice Architecture** | Feature-based organization with CQRS commands and queries |
+| **Entity Framework Core** | ORM for database modeling, migrations, and queries |
+| **SQLite** | Lightweight relational database for storing registrations |
+| **FluentValidation** | Declarative validation rules for incoming registration requests |
 
 ---
 
@@ -278,7 +278,7 @@ Open the local development URL shown in your terminal (typically `http://localho
 
 <div align="center">
 
-**🏎️ Car Show Registration System**
+** Car Show Registration System**
 
 *Built through collaborative frontend and backend engineering.*
 
