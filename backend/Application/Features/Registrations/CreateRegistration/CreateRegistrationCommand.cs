@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Application.Features.Registrations.CreateRegistration;
 
-namespace Application.Features.Registration
-{
-    internal class CreateRegistration
-    {
-    }
-}
+using Application.Abstractions.Messaging;
+using Domain.Common;
+using Domain.Enums;
+
+public sealed record CreateRegistrationCommand(
+    string ParticipantName, string ContactNumber, string Email, string Address,
+    string CarMakeModel, string PlateNumber,
+    RegistrationType RegistrationType, decimal AmountPaid)
+    : ICommand<Result<RegistrationResponse>>;
