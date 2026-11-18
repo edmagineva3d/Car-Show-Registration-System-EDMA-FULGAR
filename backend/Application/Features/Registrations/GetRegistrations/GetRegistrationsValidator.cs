@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Application.Features.Registrations.GetRegistrations;
 
-namespace Application.Features.Registrations.GetRegistrations
+using FluentValidation;
+
+public sealed class GetRegistrationsValidator : AbstractValidator<GetRegistrationsQuery>
 {
-    internal class GetRegistrationValidator
+    public GetRegistrationsValidator()
     {
+        RuleFor(x => x.ParticipantName).MaximumLength(150);
+        RuleFor(x => x.Type).IsInEnum();
+        RuleFor(x => x.Status).IsInEnum();
+        RuleFor(x => x.Page).GreaterThanOrEqualTo(1).WithMessage("'Page' must be 1 or more.");
+        RuleFor(x => x.PageSize).InclusiveBetween(1, 50).WithMessage("'Page Size' must be between 1 and 50.");
     }
 }
