@@ -2,13 +2,13 @@
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=600&size=22&duration=3000&pause=1000&color=6366F1¢er=true&vCenter=true&width=780&lines=Welcome+to+Car+Show+Registration+System;Full-Stack+Event+%26+Participant+Management;Track+Registrations%2C+KPIs%2C+Payments+%26+Statuses;React+%2B+Vite+%2B+Tailwind+CSS+%7C+ASP.NET+Core+Vertical+Slice" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=600&size=22&duration=3000&pause=1000&color=6366F1&center=true&vCenter=true&width=780&lines=Welcome+to+Car+Show+Registration+System;Full-Stack+Event+%26+Participant+Management;Track+Registrations%2C+KPIs%2C+Payments+%26+Statuses;React+%2B+Vite+%2B+Tailwind+CSS+%7C+ASP.NET+Core+Vertical+Slice" alt="Typing SVG" />
 
 **Register. Track. Filter. Manage.**
 
 A full-stack web application designed to streamline participant registrations, track payment statuses, monitor event KPIs, and manage vehicle entries for a car show event.
 
-🌐 **Live Frontend Demo:** [https://car-show-registration-system-edma-f.vercel.app/](https://car-show-registration-system-edma-f.vercel.app/)
+🌐 **Live Frontend Demo:** [Car Show Registration System](https://car-show-registration-system-edma-f.vercel.app/)
 
 </div>
 
